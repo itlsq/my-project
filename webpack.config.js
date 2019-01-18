@@ -56,6 +56,15 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
+   /* host:"192.168.1.140",
+    port:8080,
+    proxy: {
+        '/api/*': {//匹配根路径
+          target: 'http://192.168.1.140:8080',//跨域要访问的地址及端口
+          changeOrigin: true,
+          secure: false,
+        }
+      },*/
     overlay: true
   },
   performance: {

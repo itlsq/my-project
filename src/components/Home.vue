@@ -1,6 +1,6 @@
 <template>
 	<el-row class="container">
-	  <el-col :span="24"><div class="header">药品管理系统</div></el-col>
+	  <el-col :span="24"><div class="header">血液透析管理系统</div></el-col>
 	  <el-col :span="24" class="main">
 			<aside class="leftNav">
 				<!--展开折叠开关-->
@@ -13,10 +13,10 @@
 				  <el-submenu index="1">
 				    <template slot="title">
 				      <i class="el-icon-location"></i>
-				      <span slot="title">采购</span>
+				      <span slot="title">设备管理</span>
 				    </template>
-				      <el-menu-item index="1-1">采购1</el-menu-item>
-				      <el-menu-item index="1-2">采购2</el-menu-item>
+				      <el-menu-item index="1-1">设备1</el-menu-item>
+				      <el-menu-item index="1-2">设备2</el-menu-item>
 				  </el-submenu>
 				   <el-submenu index="2">
 				    <template slot="title">
@@ -110,7 +110,7 @@
 	      }
 	}
 
-	.rightContent{width:auto;height:100%;margin-left:180px;box-sizing:border-box;
+	.rightContent{width:auto;height:100%;box-sizing:border-box;
 		  background: #fff;
 	      flex: 1;
 	      overflow-y: auto;
