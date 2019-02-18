@@ -7,22 +7,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home.vue'
-import buy1 from '../components/buy1.vue'
-import buy2 from '../components/buy2.vue'
+import equipment1 from '../components/equipment1.vue'
+import equipment2 from '../components/equipment2.vue'
 Vue.use(Router)
 let router = new Router({
-  routes:[{
+  routes:[
+    {
       path: '/',
-      name: 'home',
+      name: '设备管理',
       component: Home,
-      redirect: '/buy1',
-      leaf: true, // 只有一个节点
       menuShow: true,
-      iconCls: 'iconfont icon-home', // 图标样式class
+      redirect: '/components/equipment1',
+      iconCls: 'el-icon-location', // 图标样式class
       children: [
-        {path: '/buy1', component: buy1, name: '采购1', menuShow: true},
-        {path: '/buy2', component: buy2, name: '采购2', menuShow: true}
+        {path: '/components/equipment1', component: equipment1, name: '设备1', menuShow: true},
+        {path: '/components/equipment2', component: equipment2, name: '设备2', menuShow: true}
       ]
-    }]
+    }
+    ]
 })
 export default router

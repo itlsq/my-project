@@ -8,41 +8,54 @@
 		          <i class="iconfont icon-menufold" v-show="!collapsed"></i>
 		          <i class="iconfont icon-menuunfold" v-show="collapsed"></i>
 		        </div>
-				<el-menu default-active="1-1" class="el-menu-vertical-demo" :collapse="collapsed" @open="handleOpen" @close="handleClose"  background-color="#333744"
+				<el-menu :default-active="defaultActiveIndex" router :collapse="collapsed" @select="handleSelect"  background-color="#333744"
       text-color="#fff">
-				  <el-submenu index="1">
-				    <template slot="title">
-				      <i class="el-icon-location"></i>
-				      <span slot="title">设备管理</span>
-				    </template>
-				      <el-menu-item index="1-1">设备1</el-menu-item>
-				      <el-menu-item index="1-2">设备2</el-menu-item>
-				  </el-submenu>
-				   <el-submenu index="2">
-				    <template slot="title">
-				      <i class="el-icon-menu"></i>
-				      <span slot="title">销售</span>
-				    </template>
-				      <el-menu-item index="2-1">销售1</el-menu-item>
-				      <el-menu-item index="2-2">销售2</el-menu-item>
-				  </el-submenu>
-				  <el-submenu index="3">
-				    <template slot="title">
-				      <i class="el-icon-document"></i>
-				      <span slot="title">报表</span>
-				    </template>
-				      <el-menu-item index="3-1">报表1</el-menu-item>
-				      <el-menu-item index="3-2">报表2</el-menu-item>
-				  </el-submenu>
-				  <el-submenu index="4">
-				    <template slot="title">
-				      <i class="el-icon-setting"></i>
-				      <span slot="title">系统</span>
-				    </template>
-				      <el-menu-item index="4-1">系统1</el-menu-item>
-				      <el-menu-item index="4-2">系统2</el-menu-item>
-				  </el-submenu>
-				</el-menu>
+      			<template v-for="(item,index) in $router.options.routes" v-if="item.menuShow">
+      				<el-submenu v-if="!item.leaf" :index="index+''">
+		              <template slot="title"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></template>
+		              <el-menu-item v-for="term in item.children" :key="term.path" :index="term.path" v-if="term.menuShow"
+		                            :class="$route.path==term.path?'is-active':''">
+		                <i :class="term.iconCls"></i><span slot="title">{{term.name}}</span>
+		              </el-menu-item>
+		            </el-submenu>
+		            <el-menu-item v-else-if="item.leaf&&item.children&&item.children.length" :index="item.children[0].path"
+		                          :class="$route.path==item.children[0].path?'is-active':''">
+		              <i :class="item.iconCls"></i><span slot="title">{{item.children[0].name}}</span>
+		            </el-menu-item>
+      			</template>
+				 <!--  <el-submenu index="1">
+				   <template slot="title">
+				     <i class="el-icon-location"></i>
+				     <span slot="title">设备管理</span>
+				   </template>
+				     <el-menu-item index="1-1">设备1</el-menu-item>
+				     <el-menu-item index="1-2">设备2</el-menu-item>
+				 </el-submenu>
+				  <el-submenu index="2">
+				   <template slot="title">
+				     <i class="el-icon-menu"></i>
+				     <span slot="title">销售</span>
+				   </template>
+				     <el-menu-item index="2-1">销售1</el-menu-item>
+				     <el-menu-item index="2-2">销售2</el-menu-item>
+				 </el-submenu>
+				 <el-submenu index="3">
+				   <template slot="title">
+				     <i class="el-icon-document"></i>
+				     <span slot="title">报表</span>
+				   </template>
+				     <el-menu-item index="3-1">报表1</el-menu-item>
+				     <el-menu-item index="3-2">报表2</el-menu-item>
+				 </el-submenu>
+				 <el-submenu index="4">
+				   <template slot="title">
+				     <i class="el-icon-setting"></i>
+				     <span slot="title">系统</span>
+				   </template>
+				     <el-menu-item index="4-1">系统1</el-menu-item>
+				     <el-menu-item index="4-2">系统2</el-menu-item>
+				 </el-submenu> -->
+				 				</el-menu>
 			</aside>
 			<section class="rightContent">
 				 <div class="rightDiv">
@@ -60,15 +73,13 @@
   export default {
     data() {
       return {
+      	defaultActiveIndex: "0",
         collapsed: false
       };
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      handleSelect(index){
+        this.defaultActiveIndex = index;
       },
       //折叠导航栏
       collapse: function () {
@@ -99,7 +110,7 @@
 		  }
 		 .el-submenu .el-menu-item{min-width:180px;padding-left:52px!important;}
 		 
-		 .el-menu{border-right:none}
+		 .el-menu:not(.el-menu--collapse){width:180px;border-right:none}
 		 .el-menu-item.is-active{background-color:#00C1DE!important;color:#FFF}
 		 .el-menu .el-menu-item{
 	        height: 46px;
