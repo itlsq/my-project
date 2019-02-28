@@ -16,7 +16,7 @@ const store = new Vuex.Store({
   },
   getters:{
   	count:function(state){
-  		return state.count+=100;
+  		return state.count+=300;
   	}
   },
   actions:{

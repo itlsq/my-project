@@ -35,7 +35,8 @@ let router = new Router({
       iconCls: 'el-icon-menu', // 图标样式class
       children: [
         {path: '/components/drug1', component: drug1, name: '药品1', menuShow: true},
-        {path: '/components/drug2', component: drug2, name: '药品2', menuShow: true}
+        {path: '/components/drug2', component: drug2, name: '药品2', menuShow: true},
+        {path: '/components/drug3', component: equipment2, name: '药品2内部', menuShow: false}
       ]
     },{
       path: '/',

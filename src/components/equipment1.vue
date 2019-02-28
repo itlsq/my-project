@@ -188,6 +188,9 @@
       }
 
     },
+    beforeMount(){
+      console.log(this.$route.params.name+":"+this.$route.params.age)
+    },
     mounted() {
       this.handleSearch()
     }
